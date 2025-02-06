@@ -1,0 +1,32 @@
+
+from PIL import Image
+import numpy as np
+
+def encrypt_image(image_path, key):
+    # Load the image
+    img = (r"C:/Users/Dhiraj/Downloads/porsche.jpg")
+    pixels = np.array(img)
+
+    # Encrypt pixels using XOR with the key
+    encrypted_pixels = pixels ^ key
+
+    # Save the encrypted image
+    encrypted_img = Image.fromarray(encrypted_pixels)
+    encrypted_img.save("encrypted_image.png")
+
+def decrypt_image(encrypted_image_path, key):
+    # Load the encrypted image
+    img = Image.open(encrypted_image_path)
+    pixels = np.array(img)
+
+    # Decrypt pixels using XOR with the key
+    decrypted_pixels = pixels ^ key
+
+    # Save the decrypted image
+    decrypted_img = Image.fromarray(decrypted_pixels)
+    decrypted_img.save("decrypted_image.png")
+
+# Example usage
+key = 123  # Simple key (can be more complex)
+encrypt_image("original_image.png", key)
+decrypt_image("encrypted_image.png", key)
